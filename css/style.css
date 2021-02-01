@@ -1,0 +1,57 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+
+body {
+    text-align: center;
+    font-family: cursive;
+    font-weight: 900;
+    background-color: rgb(148, 228, 226);
+    margin: 0;
+}
+
+#cont-prev-pic-next {
+    height: 160px;
+    background-color: rgb(127, 162, 192);
+    display: flex;
+    align-items: center; /* align <> buttons vertically */
+    justify-content: center;   /* align to center width */
+}
+
+
+/* < button margins > */
+#btn-prev, #btn-next {
+    margin: 10px;
+}
+
+
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+
+
+p {
+    margin: 0;
+}
+
+#info {
+    text-align: left;
+    background-color: rgb(215, 242, 255);
+    max-width: 200px;
+    margin: auto;    
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#info p{
+    display: inline;
+}
+
+.intro {
+    opacity: 0.4;
+}
+
