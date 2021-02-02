@@ -56,3 +56,10 @@ h1 {
     opacity: 0.4;
 }
 
+
+
+.btn-disabled {
+    opacity: 0.5;
+    color: rgb(26, 82, 96);
+    background-color: rgb(200, 251, 255);
+}

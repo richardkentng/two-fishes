@@ -1,27 +1,54 @@
 console.log('your insane check');
 
+let male = false;
+let either = true;
+let female = false;
 
-// let either = true;
-// let male = false;
-// let female = false;
-
-// const selMale = () => {
-//     male = true;
-//     female = false;
-//     either = false;
-// }
-// const selFemale = () => {
-//     female = true;
-//     male = false;
-//     either = false;
-// }
-// const selEither = () => {
-//     either = true;
-//     male = false;
-//     female = false;
-// }
+//select the following buttons: btn-male, btn-either, btn-female
+const btnMale = document.querySelector('.btn-male')
+const btnEither = document.querySelector('.btn-either')
+const btnFemale = document.querySelector('.btn-female')
 
 
+const removeBtnDisabled = () => {
+    btnMale.classList.remove('btn-disabled')
+    btnEither.classList.remove('btn-disabled')
+    btnFemale.classList.remove('btn-disabled')
+}
+
+const clickMale = () => {
+    console.log('male maine');
+    male = true;
+    female = false;
+    either = false;
+    removeBtnDisabled();
+    btnFemale.classList.toggle('btn-disabled')
+    btnEither.classList.toggle('btn-disabled')
+
+}
+const clickEither = () => {
+    console.log('eithe rman');
+    either = true;
+    male = false;
+    female = false;
+    removeBtnDisabled();
+    btnMale.classList.toggle('btn-disabled')
+    btnFemale.classList.toggle('btn-disabled')    
+}
+const clickFemale = () => {
+    console.log('female man');
+    female = true;
+    male = false;
+    either = false;
+    removeBtnDisabled();
+    btnMale.classList.toggle('btn-disabled')
+    btnEither.classList.toggle('btn-disabled')    
+}
+
+//add event listeners to male, either, female buttons
+btnMale.addEventListener('click',clickMale)
+btnEither.addEventListener('click',clickEither)
+btnFemale.addEventListener('click',clickFemale)
 
 // update picture
 const updatePicture = () => {
@@ -57,7 +84,7 @@ const updateInfo = () => {
 }
 
     
-    const hitNext = () => {
+    const clickNext = () => {
         fetch('https://randomuser.me/api/')
         .then((responseData) => {
             return responseData.json()
@@ -73,5 +100,5 @@ const updateInfo = () => {
 
     //select btn-next, add listener
     const btnNext = document.querySelector('.btn-next')
-    btnNext.addEventListener('click',hitNext)
+    btnNext.addEventListener('click',clickNext)
 
