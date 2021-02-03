@@ -43,7 +43,7 @@ h1 {
 
 .info {
     text-align: left;
-    background-color: rgb(215, 242, 255);
+    background-color: rgb(221, 244, 255);
     max-width: 250px;
     margin: auto;
     padding: 10px;
@@ -59,7 +59,7 @@ h1 {
 
 
 .btn-disabled {
-    opacity: 0.5;
-    color: rgb(26, 82, 96);
-    background-color: rgb(200, 251, 255);
+    opacity: 0.6;
+    color: rgb(22, 34, 41);
+    background-color: rgb(209, 254, 255);
 }
