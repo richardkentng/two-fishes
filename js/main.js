@@ -151,12 +151,12 @@ let remFemale = null;
        {
             console.log('%c gunna run fetch','color: lime; background: black;');
 
-            fetch('https://randomuser.me/api/?results=50')
+            fetch('https://randomuser.me/api/?results=100')
             .then((responseData) => {
                 return responseData.json()
             })
             .then((jsonData) => { //THENTEHNTEHNTEHNEHTENETHENTHENETHENTHETNETHENTEHTNEHTEN
-                console.log('%c --------------.then-----------','color: lime; background: black;');
+                console.log('%c --------------.then top-----------','color: lime; background: black;');
 
                 //get array of people objects
                 peopleGbl = jsonData.results;  
@@ -169,6 +169,7 @@ let remFemale = null;
                 personGbl = peopleGbl[currentIndex];
                 updatePicture();
                 updateInfo();
+                console.log('%c --------------.then bot-----------','color: lime; background: black;');
             })  // end .then
     } else {
         //search paramaters are the same!  Thre are still more matches in array!
