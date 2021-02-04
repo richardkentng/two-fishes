@@ -6,7 +6,7 @@ Just some random header text for my list below:
 - list item 2 random sdkljfdsf **I'm bold** I'm not.
 - list item 3 random dsfhj *I'm italicized*  I'm not.
 
-###some code enclosed in backticks:
+### some code enclosed in backticks:
 ```
 const clickMale = () => {
     male = true;
