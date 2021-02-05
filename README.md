@@ -28,14 +28,14 @@
 
 
 ## Silver Layout
-![gold](/images/silver.png)
 - User can click “either” to view both male and female profiles.
 - User can click “age range” to specify an age range.
 - User can click “prev fish” to see previous profile.
+![gold](/images/silver.png)
 
 
 
 ## Gold Layout
-![silver](/images/gold.png)
 - User can click “save fish” to save profile.  
 - User can click “pond” to view saved profiles.
+![silver](/images/gold.png)
