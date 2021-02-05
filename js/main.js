@@ -1,13 +1,40 @@
 
 console.log('------------------sanity check -----------------------');
 
+const countries = ["select country","Australia", "Brazil", "Canada", "Denmark", "Finland", "France", "Germany", "Iran", "Ireland", "Netherlands", "New Zealand", "Norway", "Spain", "Switzerland", "Turkey", "United Kingdom", "United States"]
+
+//create drop-down menu to select country
+const selectCountry = document.querySelector('.select-country')
+countries.forEach((country) => {
+    const newCountryOption = document.createElement('option')
+    if (country === "select country") {
+        newCountryOption.setAttribute('class','select-country')
+    }
+    newCountryOption.textContent = country;
+    newCountryOption.setAttribute('value',country)
+    selectCountry.appendChild(newCountryOption)
+})
+
+let sameParameters = true;
+
+
+let numResults = 100;
+
 let currentIndex = null;
 let peopleGbl = [];
 let personGbl = [];
 
+let remMale = null;
+let remEither = null;
+let remFemale = null;
+let remCountryValue = null;
+
 let male = false;
 let either = true;
 let female = false;
+
+let conErrors = 0;
+
 
 
 //store button elements
@@ -21,16 +48,11 @@ const btnPrev = document.querySelector('.btn-prev')
 btnPrev.disabled = true;
 
 
-
-
-
-
 const removeBluesOnGenderButtons = () => {
     btnMale.classList.remove('btn-disabled')
     btnEither.classList.remove('btn-disabled')
     btnFemale.classList.remove('btn-disabled')
 }
-
 const clickMale = () => {
     male = true;
     female = false;
@@ -38,7 +60,6 @@ const clickMale = () => {
     removeBluesOnGenderButtons();
     btnFemale.classList.toggle('btn-disabled')
     btnEither.classList.toggle('btn-disabled')
-
 }
 const clickEither = () => {
     either = true;
@@ -61,6 +82,12 @@ const clickFemale = () => {
 btnMale.addEventListener('click',clickMale)
 btnEither.addEventListener('click',clickEither)
 btnFemale.addEventListener('click',clickFemale)
+
+
+
+
+
+
 
 // update picture
 const updatePicture = () => {
@@ -95,14 +122,9 @@ const updateInfo = () => {
 
 
     const filterGender = () => {
-        // console.log('enterFilterGender');
-        // console.log('peopleGbl:', peopleGbl);
         const peopleGendered = [];
 
         for (let i = 0; i < peopleGbl.length; i++) {
-            // const msg = male ? "check user for male":"check user for female";
-            // console.log(msg)
-
             if (male) {
                 if (peopleGbl[i].gender === "male") {
                     peopleGendered.push(peopleGbl[i]);
@@ -114,55 +136,81 @@ const updateInfo = () => {
             }
         }   //end for loop 
 
-        if (peopleGendered.length === 0) {
-            console.log('%c peopleGendered array is empty!','color: red; background: black;');
-        }
-
         peopleGbl = peopleGendered.slice()
-        // for (let i = 0; i < peopleGbl.length; i++) {
-        //     console.log(peopleGbl[i].gender);
-        // }
     }   //end of function: filterGender
 
 
+const filterCountry = () => {
+    const countriedPeople = [];
+    //push people of correct country into countriedPeople array
+    peopleGbl.forEach((person) => {
+        if (person.location.country === selectCountry.value) {
+            countriedPeople.push(person)
+        }
+    })
 
-let remMale = null;
-let remEither = null;
-let remFemale = null;
+    
+    if (countriedPeople.length === 0) {
+        console.log('%c CountriedPeople array is empty!  Going to rerun fetch.','color: yellow; background: black');
+        if (numResults * 2 > 500) {
+            numResults = 500; 
+        } else {
+            numResults *= 2;
+        }
+        clickNext()
+    } else {
+        numResults = 100;
+        peopleGbl = countriedPeople.slice()
+    }
+}
+
+
+    const updateRemValues = () => {
+        remMale = male;
+        remEither = either;
+        remFemale = female;
+        remCountryValue = selectCountry.value;
+    }
 
 
     const clickNext = () => {
-
-        let sameParamaters = true;
+        console.log('%c YOU CLICKED NEXT','color: yellow; background: black;');
         if (remMale === null) {
-            remMale = male;
-            remEither = either;
-            remFemale = female;
+            updateRemValues();
         } else {
-            if ((remMale !== male) || (remEither !== either) || (remFemale !== female)) {
-                sameParamaters = false;
-                remMale = male;
-                remEither = either;
-                remFemale = female;                
+            //are parameters the same or different from last time?
+            if ((remMale !== male) || (remEither !== either) || (remFemale !== female) || (remCountryValue !== selectCountry.value)) {
+                sameParameters = false;
+                updateRemValues();             
+            } else {
+                sameParameters = true;
             }
         }
 
-       if ((remMale === null) || (!sameParamaters) || (currentIndex + 1 > peopleGbl.length - 1))
+        //run fetch if page is first loading up, if search parameters change, or if array has no more persons
+       if ((remMale === null) || (!sameParameters) || (currentIndex + 1 > peopleGbl.length - 1))
        {
+            btnNext.disabled = true;
+            if (!sameParameters) {
+                console.log('%c DIFFERENT PARAMETERS INITIATED FETCH','color: cyan; background: black;');
+            }
             console.log('%c gunna run fetch','color: lime; background: black;');
 
-            fetch('https://randomuser.me/api/?results=100')
-            .then((responseData) => {
-                return responseData.json()
-            })
-            .then((jsonData) => { //THENTEHNTEHNTEHNEHTENETHENTHENETHENTHETNETHENTEHTNEHTEN
+            fetch(`https://randomuser.me/api/?results=${numResults}`).then((res) => res.json()).then((jsonData) => {
+
                 console.log('%c --------------.then top-----------','color: lime; background: black;');
 
-                //get array of people objects
+                //globalize fresh array of persons
                 peopleGbl = jsonData.results;  
 
+                //if male or female is selected, then filter by gender
                 if (!either) {
                     filterGender()
+                }
+
+                //if a country is selected, then filter by country
+                if (selectCountry.value !== "select country") {
+                    filterCountry()
                 }
 
                 currentIndex = 0;
@@ -170,11 +218,24 @@ let remFemale = null;
                 updatePicture();
                 updateInfo();
                 console.log('%c --------------.then bot-----------','color: lime; background: black;');
-            })  // end .then
+                console.log(`%cmatches: ${peopleGbl.length}`,'color: pink;','     total:',`${numResults}`);
+                btnNext.disabled = false;
+            })
+            .catch((error) => {
+                btnNext.disabled = false;
+                conErrors++
+                if (conErrors === 3) {
+                    conErrors = 0;
+                    alert('API encountered 3 consecutive errors.  Please wait a moment before trying again.')
+                } else {
+                    console.log(`%c RAN INTO ERROR.  WILL clickNext.  Error consecutives: ${conErrors}`,'color: magenta; background: black;');
+                    clickNext()
+                }
+            })
     } else {
-        //search paramaters are the same!  Thre are still more matches in array!
+        //page did not just load up, search paramaters are the same, and there are still more matches in array!
         currentIndex++;        
-        console.log(`${currentIndex}/${peopleGbl.length - 1}`)
+        console.log(`${currentIndex + 1}/${peopleGbl.length}`)
         personGbl = peopleGbl[currentIndex]
         updatePicture();
         updateInfo();
@@ -187,14 +248,9 @@ let remFemale = null;
     //add listener to btnNext
     btnNext.addEventListener('click',clickNext)
 
+    selectCountry.addEventListener('change',() => {
+        console.log(`%c${selectCountry.value}`,'color: orange; background: black;');
+    })
+
     clickEither()
     clickNext()
-
-
-
-
-    function z() {
-        console.log('male',remMale);
-        console.log('either',remEither);
-        console.log('female',remFemale);
-    }
