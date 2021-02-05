@@ -1,7 +1,7 @@
 # [Twofish](https://richardkentng.github.io/two-fishes/)
 (Click the text above to be redirected to Twofish!)
 
-### Decription:
+### Description:
 A dating site where users can view profiles and contact information, and filter results based off gender and country!
 
 ![twofish](/images/twofish.png)
