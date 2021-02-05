@@ -166,11 +166,13 @@ select {
 
 
 #recolor1 {
-    /* color: red; */
+    color: rgb(233, 251, 255);
+    background-color: rgb(233, 251, 255);
 }
 
 #recolor2 {
-    /* color: black; */
+    color: rgb(233, 251, 255);
+    background-color: rgb(233, 251, 255);    
 }
 
 
