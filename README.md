@@ -1,5 +1,5 @@
 # [Twofish](https://richardkentng.github.io/two-fishes/)
-(Click the text above to be redirected to Twofish!)
+(Click the text above to be redirected to Twofish, a CONCEPT dating site!)
 
 ### Description:
 A dating site where users can view profiles and contact information, and filter results based off gender and country!
@@ -116,6 +116,22 @@ function updateFirst() {
     first.style.width = `${percent}%`
 }
 ```
+
+### Layouts vs Results 
+##### Age Input?
+I did not end up using age input because the API
+produced ages that didn't make sense.  For example,
+it would show an image of a young man, and claim that 
+he was 80 years old!  Instead, I decided to use my time to
+ make a select-country input instead.  After all, people 
+only want to contact others who speak the same language!  
+##### Saving User Profiles?
+I suppose I could have explored localStorage, so that users could
+maybe store favorited profile information on their computer, but I 
+used my allotted time to make a progress bar, and a select-country
+input instead.  When I learn about online databases and servers,
+that's when I'll look more into saving data!
+
 
 ### Final Thoughts
 I'm satisfied with what I was able to acccomplish in one week.
