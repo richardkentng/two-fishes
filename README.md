@@ -10,7 +10,7 @@ A dating site where users can view profiles and contact information, and filter 
 - HTML
 - CSS
 - Javascript
-- randomuser.me (API)
+- https://randomuser.me/ (API)
 
 ### User Stories:
 ##### MVP GOALS:
