@@ -1,6 +1,4 @@
 
-console.log('------------------sanity check -----------------------');
-
 function sel(string) {
     return document.querySelector(string)
 }
@@ -10,29 +8,16 @@ const first = sel('.first')
 
 //update progress bar
 function updateFirst() {
-    console.log('%c WOOT YEAH!','color: lime; background: magenta;');
     //calculate percentage fraciton
     const num1 = currentIndex + 1;
     const num2 = peopleGbl.length;
     const fraction = num1/num2
     let percent = Math.floor(fraction * 100)
-    console.log('num1', num1);
-    console.log('num2',num2);
-    console.log('percent',percent);
     if (percent === 99) {
         percent = 100;
     }
     first.style.width = `${percent}%`
-    console.log('widfirstth should be set!!!!!!!!');
-
 }
-
-
-//first.style.width = "50%";
-
-
-
-
 
 const countries = ["select country","Australia", "Brazil", "Canada", "Denmark", "Finland", "France", "Germany", "Iran", "Ireland", "Netherlands", "New Zealand", "Norway", "Spain", "Switzerland", "Turkey", "United Kingdom", "United States"]
 
@@ -50,7 +35,6 @@ countries.forEach((country) => {
 
 let sameParameters = true;
 
-
 let numResults = 100;
 
 let currentIndex = null;
@@ -67,7 +51,6 @@ let either = true;
 let female = false;
 
 let conErrors = 0;
-
 
 
 //store button elements
@@ -117,18 +100,12 @@ btnEither.addEventListener('click',clickEither)
 btnFemale.addEventListener('click',clickFemale)
 
 
-
-
-
-
-
 // update picture
 const updatePicture = () => {
     const img = document.querySelector('.pic')
     const newSrcValue = personGbl.picture.large
     img.setAttribute('src',`${newSrcValue}`)
 }
-
 
 //update textContent of informational paragraphs-elements 
 const updateInfo = () => {
@@ -163,12 +140,6 @@ const updateInfo = () => {
 
     //replace innerHTML for first recolor with space
     document.querySelector('#recolor1').innerHTML = "&nbsp";
-
-
-    //center class:  cont-info
-    // const contInfo = document.querySelector('.cont-info')
-    // const contIntro = document.querySelector('.cont-intro')
-    // contIntro.style.marginLeft = "20px";
 }
 
 
@@ -202,7 +173,7 @@ const filterCountry = () => {
 
     
     if (countriedPeople.length === 0) {
-        console.log('%c CountriedPeople array is empty!  Going to rerun fetch.','color: yellow; background: black');
+        //console.log('%c CountriedPeople array is empty!  Going to rerun fetch.','color: yellow; background: black');
         if (numResults * 2 > 500) {
             numResults = 500; 
         } else {
@@ -225,10 +196,9 @@ const filterCountry = () => {
 
 
     const clickNext = () => {
-        console.log('%c YOU CLICKED NEXT','color: yellow; background: black;');
+        //console.log('%c YOU CLICKED NEXT','color: yellow; background: black;');
         //load gif animation
         const pic = document.querySelector('.pic')
-        console.log('new stuff',pic);
         pic.setAttribute('src','https://thumbs.dreamstime.com/b/blue-illustration-two-fish-love-heart-21147009.jpg')
         
         if (remMale === null) {
@@ -248,13 +218,13 @@ const filterCountry = () => {
        {
             btnNext.disabled = true;
             if (!sameParameters) {
-                console.log('%c DIFFERENT PARAMETERS INITIATED FETCH','color: cyan; background: black;');
+                //console.log('%c DIFFERENT PARAMETERS INITIATED FETCH','color: cyan; background: black;');
             }
-            console.log('%c gunna run fetch','color: lime; background: black;');
+            //console.log('%c gunna run fetch','color: lime; background: black;');
 
             fetch(`https://randomuser.me/api/?results=${numResults}`).then((res) => res.json()).then((jsonData) => {
 
-                console.log('%c --------------.then top-----------','color: lime; background: black;');
+                //console.log('%c --------------.then top-----------','color: lime; background: black;');
 
                 //globalize fresh array of persons
                 peopleGbl = jsonData.results;  
@@ -274,13 +244,12 @@ const filterCountry = () => {
                 personGbl = peopleGbl[currentIndex];
                 updatePicture();
                 updateInfo();
-                console.log('%c --------------.then bot-----------','color: lime; background: black;');
-                console.log(`%cmatches: ${peopleGbl.length}`,'color: pink;','     total:',`${numResults}`);
+                //console.log('%c --------------.then bot-----------','color: lime; background: black;');
+                //console.log(`%cmatches: ${peopleGbl.length}`,'color: pink;','     total:',`${numResults}`);
                 btnNext.disabled = false;
 
                 //disable prev after running fetch
                 btnPrev.disabled = true; 
-
             })
             .catch((error) => {
                 btnNext.disabled = false;
@@ -289,7 +258,7 @@ const filterCountry = () => {
                     conErrors = 0;
                     alert('API encountered 3 consecutive errors.  Please wait a moment before trying again.')
                 } else {
-                    console.log(`%c RAN INTO ERROR.  WILL clickNext.  Error consecutives: ${conErrors}`,'color: magenta; background: black;');
+                    //(`%c RAN INTO ERROR.  WILL clickNext.  Error consecutives: ${conErrors}`,'color: magenta; background: black;');
                     clickNext()
                 }
             })
@@ -297,7 +266,7 @@ const filterCountry = () => {
         //page did not just load up, search paramaters are the same, and there are still more matches in array!
         currentIndex++;
         updateFirst()        
-        console.log(`${currentIndex + 1}/${peopleGbl.length}`)
+        //console.log(`${currentIndex + 1}/${peopleGbl.length}`)
         personGbl = peopleGbl[currentIndex]
         updatePicture();
         updateInfo();
@@ -321,13 +290,13 @@ const filterCountry = () => {
     btnNext.addEventListener('click',clickNext)
     //add listener to btnPrev
     btnPrev.addEventListener('click', () => {
-        console.log('YOU CLICKED %C PREV','color: yellow; background: black;');
+        //console.log('YOU CLICKED %C PREV','color: yellow; background: black;');
         currentIndex = currentIndex  - 2;
         clickNext()
     })
 
     selectCountry.addEventListener('change',() => {
-        console.log(`%c${selectCountry.value}`,'color: orange; background: black;');
+        //console.log(`%c${selectCountry.value}`,'color: orange; background: black;');
     })
 
     clickEither()
