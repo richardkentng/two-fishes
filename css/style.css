@@ -2,6 +2,7 @@
     box-sizing: border-box;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
     text-align: center;
@@ -14,45 +15,72 @@ body {
 
 .cont-prev-pic-next {
     height: 250px;
-    background-color: rgb(88, 164, 192);
+    background-color: rgb(79, 172, 189);
     display: flex;
     flex-direction: row;
     align-items: center; /* align <> buttons vertically */
     justify-content: center;   /* align to center width */
+    max-width: 500px;
+    margin: auto;
+    border-radius: 7px;
+    margin-bottom: 0;
+}
+
+.bar {
+    display: flex;
+    height: 4px;
+    background-color: rgb(38, 123, 129);
+    max-width: 500px;
+    margin: auto;
+    border-radius: 7px;
+}
+
+.first {
+    width: 0%;
+    background-color: cyan;
 }
 
 
 
 .gender {
     padding: 10px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    font-family: cursive;
 }
 
 /* < button margins > */
 .btn-prev, .btn-next {
     margin: 10px;
-    padding: 20px;
+    padding: 20px 20px 40px 20px;
+    border-radius: 7px;
+    font-family: cursive;
 }
 img {
     width: 220px;
+    height: 220px;
     /* height: 250px; */
     border-radius: 10px;
+    border: 7px solid rgb(207, 242, 255);
 }
 p {
     margin: 0;
 }
 h1 {
-    display: none;
     font-size: 50px;
+    font-family: 'Lobster', cursive;
 }
-
+select {
+    font-family: cursive;
+}
 
 
 .info {
     text-align: left;
     background-color: rgb(221, 244, 255);
     width: 70%;
-    max-width: 500px;
-    margin: auto;
+    /* max-width: 500px; */
+    /* margin: auto; */
     padding: 10px;
     border-radius: 5px;
 }
@@ -73,3 +101,79 @@ h1 {
     color: rgb(22, 34, 41);
     background-color: rgb(209, 254, 255);
 }
+
+
+.cont-info {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(233, 251, 255);
+    max-width: 500px;
+    margin: auto;
+}
+
+.cont-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 40px;;
+    /* background-color: pink; */
+}
+
+.cont-intro-value {
+    color: rgb(56, 113, 138);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    /* background-color: orangered; */
+}
+
+
+.cont-name-age  {
+    display: flex;
+}
+
+.cont-select-country {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-end; */
+}
+
+/* color background of intro keywords */
+/* .cont-intro .name {
+    background-color: green;
+}
+.cont-intro .under-name {
+    background-color: purple;
+}
+.cont-intro .location {
+    background-color: green;
+}
+.cont-intro .phone {
+    background-color: purple;
+} */
+
+
+/* container: cont-select-country */
+.leftof-select-country {
+    width:  50px;
+
+}
+.select-country {
+    width: 100%;
+}
+
+
+
+#recolor1 {
+    /* color: red; */
+}
+
+#recolor2 {
+    /* color: black; */
+}
+
+
+/* .center-me {
+    margin: auto;
+} */

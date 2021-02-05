@@ -1,6 +1,39 @@
 
 console.log('------------------sanity check -----------------------');
 
+function sel(string) {
+    return document.querySelector(string)
+}
+
+//grab first element
+const first = sel('.first')
+
+//update progress bar
+function updateFirst() {
+    console.log('%c WOOT YEAH!','color: lime; background: magenta;');
+    //calculate percentage fraciton
+    const num1 = currentIndex + 1;
+    const num2 = peopleGbl.length;
+    const fraction = num1/num2
+    let percent = Math.floor(fraction * 100)
+    console.log('num1', num1);
+    console.log('num2',num2);
+    console.log('percent',percent);
+    if (percent === 99) {
+        percent = 100;
+    }
+    first.style.width = `${percent}%`
+    console.log('widfirstth should be set!!!!!!!!');
+
+}
+
+
+//first.style.width = "50%";
+
+
+
+
+
 const countries = ["select country","Australia", "Brazil", "Canada", "Denmark", "Finland", "France", "Germany", "Iran", "Ireland", "Netherlands", "New Zealand", "Norway", "Spain", "Switzerland", "Turkey", "United Kingdom", "United States"]
 
 //create drop-down menu to select country
@@ -114,10 +147,28 @@ const updateInfo = () => {
     
     //display information by using accessing textContent
     nameEl.textContent = nameValue
-    ageEl.textContent = ageValue
+    ageEl.innerHTML = `&nbsp;&nbsp;&nbsp;${ageValue}`
     locationEl.textContent = locationValue
     phoneEl.textContent = phoneValue
     //console.log(nameValue, ageValue, locationValue, phoneValue);
+
+    //increase spacing before country-select based on length of city
+        //select paragraph element of leftof-select-country
+        const leftofSelectCountryValue = document.querySelector('.leftof-select-country')
+        //select value from person - city 
+        const cityLength = personGbl.location.city.length
+        const extraSpacesBeforeSelectCountryBasedOnCityLength = "&nbsp;".repeat(cityLength)
+        //add value to end of leftof-select-country textContent 
+        leftofSelectCountryValue.innerHTML = extraSpacesBeforeSelectCountryBasedOnCityLength
+
+    //replace innerHTML for first recolor with space
+    document.querySelector('#recolor1').innerHTML = "&nbsp";
+
+
+    //center class:  cont-info
+    // const contInfo = document.querySelector('.cont-info')
+    // const contIntro = document.querySelector('.cont-intro')
+    // contIntro.style.marginLeft = "20px";
 }
 
 
@@ -175,6 +226,11 @@ const filterCountry = () => {
 
     const clickNext = () => {
         console.log('%c YOU CLICKED NEXT','color: yellow; background: black;');
+        //load gif animation
+        const pic = document.querySelector('.pic')
+        console.log('new stuff',pic);
+        pic.setAttribute('src','https://thumbs.dreamstime.com/b/blue-illustration-two-fish-love-heart-21147009.jpg')
+        
         if (remMale === null) {
             updateRemValues();
         } else {
@@ -214,12 +270,17 @@ const filterCountry = () => {
                 }
 
                 currentIndex = 0;
+                updateFirst()
                 personGbl = peopleGbl[currentIndex];
                 updatePicture();
                 updateInfo();
                 console.log('%c --------------.then bot-----------','color: lime; background: black;');
                 console.log(`%cmatches: ${peopleGbl.length}`,'color: pink;','     total:',`${numResults}`);
                 btnNext.disabled = false;
+
+                //disable prev after running fetch
+                btnPrev.disabled = true; 
+
             })
             .catch((error) => {
                 btnNext.disabled = false;
@@ -234,11 +295,22 @@ const filterCountry = () => {
             })
     } else {
         //page did not just load up, search paramaters are the same, and there are still more matches in array!
-        currentIndex++;        
+        currentIndex++;
+        updateFirst()        
         console.log(`${currentIndex + 1}/${peopleGbl.length}`)
         personGbl = peopleGbl[currentIndex]
         updatePicture();
         updateInfo();
+
+
+        //control btnPrev display
+        if (currentIndex - 1 >= 0) {
+            btnPrev.disabled = false;
+            //console.log('button enabled because its possuble');
+        } else {
+            btnPrev.disabled = true;
+            //console.log('button disabled because its not possible');
+        }
     }
 
 
@@ -247,6 +319,12 @@ const filterCountry = () => {
 
     //add listener to btnNext
     btnNext.addEventListener('click',clickNext)
+    //add listener to btnPrev
+    btnPrev.addEventListener('click', () => {
+        console.log('YOU CLICKED %C PREV','color: yellow; background: black;');
+        currentIndex = currentIndex  - 2;
+        clickNext()
+    })
 
     selectCountry.addEventListener('change',() => {
         console.log(`%c${selectCountry.value}`,'color: orange; background: black;');

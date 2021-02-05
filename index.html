@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two Fishes</title>
+    <title>Twofish</title>
     <link rel="stylesheet" href="./css/style.css">
     <script defer src="./js/main.js"></script>
 </head>
@@ -12,7 +12,7 @@
 
 
 <body>
-    <h1>Two Fishes</h1>
+    <h1> ~ Twofish ~</h1>
 
     <button class="gender btn-male">male</button>
     <button class="gender btn-either">either</button>
@@ -22,35 +22,45 @@
 
     <div class="cont-prev-pic-next">
         <button class="btn-prev" style="height: 50px">PREV</button>
-        <img class="pic" src="https://png.pngtree.com/element_our/png/20181226/blue-blur-circular-with-bokeh-lights-background-png_285512.jpg">  
+        <img class="pic" src="https://thumbs.dreamstime.com/b/blue-illustration-two-fish-love-heart-21147009.jpg">  
 
         <button class="btn-next" style="height: 50px">NEXT</button>
     </div>
 
-    <br />
-
-    <div class="info">
-        <p class="intro">name:</p>
-            <p class="intro-value name-value"></p>
-
-        <br />
-
-        <p class="intro">age:</p>
-            <p class="intro-value age-value"></p>
-
-            <br /> 
-        
-        <select name="" id="" class="select-country"></select>
-
-        <p class="intro">location:</p>
-            <p class="intro-value location-value"></p>    
-
-            <br />       
-        
-        <p class="intro">phone:</p>
-            <p class="intro-value phone-value"></p>    
+    <div class="bar">
+        <div class="first"></div>
     </div>
 
+
+    <br />
+    <div class="cont-info info">
+        <div class="cont-intro">
+            <p class="intro name">name:</p>
+            <p class="intro under-name" id="recolor1">|</p>
+            <p class="intro location">location:</p>
+            <p class="intro phone">phone:</p>
+        </div>
+        <div class="cont-intro-value">
+            <div class="cont-name-age">
+                <p class="intro-value name-value"></p>
+                <p class="intro-value age-value"></p>
+            </div>
+            <div class="cont-select-country">
+                <p class="leftof-select-country" id="recolor2">|</p>
+                <select name="" id="" class="select-country"></select>
+            </div>
+            <div class="cext-location-value">
+                <p class="intro-value location-value"></p> 
+            </div>
+                <div class="cext-phone-value">
+                <p class="intro-value phone-value"></p>    
+            </div>   
+        </div>      
+    </div>
+
+
+<br />
+<br />
 
 </body>
 </html>
